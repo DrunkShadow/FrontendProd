@@ -14,29 +14,66 @@ import { HttpClient } from '@angular/common/http';
 export class ModelsComponent implements OnInit {
 
   modelsArray: any[] = [];
+  keyObjectsArray : any[] = [];
+  selectObjects: string = '';
+  clickedObjects: string[] = [];
+  keywordsArray: any[] = [];
+
   Description: boolean = false;
   modelId: string = '';
   showInputs=false;
   constructor(private http: HttpClient) {}
-
 
   inputModelId :string ='';
   inputModelText :string ='';
   inputModelDiffusion :string ='';
 
 
+  
+
+  ngOnInit()
+  {
+    this.getKeywords()
+    this.getModels()
+    this.getDistinctConcernedObjects()
+  }
+  getKeywords() {
+    fetch('http://127.0.0.1:8000/keywords')
+      .then(response => response.json())
+      .then(data => {
+        this.keywordsArray = data;
+      })
+
+  }
+
+
+  onChosen(selectedObjName: string) {
+    const index = this.clickedObjects.indexOf(selectedObjName);
+    if (index !== -1) {
+      this.clickedObjects.splice(index, 1);
+    } else {
+      this.clickedObjects.push(selectedObjName);
+    }  
+  }
+
+  getDistinctConcernedObjects() {
+    fetch('http://127.0.0.1:8000/keywordsObjects')
+      .then(response => response.json())
+      .then(data => {
+        this.keyObjectsArray = data;
+      })
+  }
+
   toggleAddModel(){
     this.inputModelId  ='';
     this.inputModelText  ='';
     this.inputModelDiffusion  ='';
+    this.clickedObjects = [];
     this.showInputs=!this.showInputs;
 
   }
 
-  ngOnInit()
-  {
-    this.getModels()
-  }
+ 
   getModels() {
     fetch('http://127.0.0.1:8000/models')
     .then(response => {
@@ -62,8 +99,11 @@ export class ModelsComponent implements OnInit {
 
 
   saveModel() {
-
-    this.http.post(`http://127.0.0.1:8000/models/${this.inputModelId}/${this.inputModelText}/${this.inputModelDiffusion}`, { responseType: 'text' })
+    var projExists=0;
+    var workerExists = 0;
+    if(this.clickedObjects.indexOf('project')>-1) projExists=1;
+    if(this.clickedObjects.indexOf('worker')>-1) workerExists=1;
+    this.http.post(`http://127.0.0.1:8000/models/${this.inputModelId}/${this.inputModelText}/${this.inputModelDiffusion}/${projExists}/${workerExists}`, { responseType: 'text' })
       .subscribe(response => {
         console.log('Model saved successfully:', response);
       }, error => {
