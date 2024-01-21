@@ -5,17 +5,21 @@
     <div>
         <button (click)="toggleAddModel()">Add Model</button>
         <div *ngIf="showInputs">
-            <app-model-creator (Cancel)="handleCancelEvent($event)"></app-model-creator>
+            <app-model-creator (Cancel)="toggleAddModel()" (Refresh)="getModels()"></app-model-creator>
         </div>
     </div>
 
 
 
+<table>
+<tr *ngFor="let element of modelsArray">
 
-<div *ngFor="let element of modelsArray">
-    {{element.id}} <button (click)="showDescription(element.id)">view</button>
-</div>
+    <td>{{element.id}} </td>
+    <td><button (click)="showDescription(element.id)">view</button></td>
+    <td><button (click)="deleteModel(element.id)">delete</button></td>
 
+</tr>
+</table>
 <div *ngIf="Description">
     <app-models-description [desId]="modelId" class="show"></app-models-description>
 </div>

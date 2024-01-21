@@ -25,7 +25,8 @@ export class ModelCreatorComponent implements OnInit {
   inputModelText :string ='';
   inputModelDiffusion :string ='';
 
-  @Output() Cancel: EventEmitter<boolean> = new EventEmitter();
+  @Output() Cancel = new EventEmitter<any>();
+  @Output() Refresh = new EventEmitter<any>();
 
 
   ngOnInit()
@@ -33,9 +34,8 @@ export class ModelCreatorComponent implements OnInit {
     this.getKeywords()
     this.getDistinctConcernedObjects()
   }
-  emitEvent() {
-    this.Cancel.emit(false);
-  }
+  
+
   getKeywords() {
     fetch('http://127.0.0.1:8000/keywords')
       .then(response => response.json())
@@ -66,24 +66,52 @@ export class ModelCreatorComponent implements OnInit {
   cancelAdding(){
     this.inputModelId  ='';
     this.inputModelText  ='';
-    this.inputModelDiffusion  ='';
     this.clickedObjects = [];
-    this.emitEvent();
-    
-
+    this.Cancel.emit();
   }
+
 
   saveModel() {
     var projExists=0;
     var workerExists = 0;
     if(this.clickedObjects.indexOf('project')>-1) projExists=1;
     if(this.clickedObjects.indexOf('worker')>-1) workerExists=1;
-    this.http.post(`http://127.0.0.1:8000/models/${this.inputModelId}/${this.inputModelText}/${this.inputModelDiffusion}/${projExists}/${workerExists}`, { responseType: 'text' })
-      .subscribe(response => {
-        console.log('Model saved successfully:', response);
-      }, error => {
-        console.error('Error saving model:', error);
-      });
+    fetch(`http://127.0.0.1:8000/models`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+        id: this.inputModelId,
+        text: this.inputModelText,
+        concernsProject: projExists,
+        concernsWorker: workerExists
+      }),
+    })
+    .then(response => {
+      console.log('Model saved successfully:', response);
+      this.cancelAdding()
+      this.Refresh.emit()
+    }
+    )
   }
 
+
+
+
+  // saveModel() {
+  //   var projExists=0;
+  //   var workerExists = 0;
+  //   if(this.clickedObjects.indexOf('project')>-1) projExists=1;
+  //   if(this.clickedObjects.indexOf('worker')>-1) workerExists=1;
+  //   this.http.post(`http://127.0.0.1:8000/models/${this.inputModelId}/${this.inputModelText}/${projExists}/${workerExists}`, { responseType: 'text' })
+  //     .subscribe(response => {
+  //       console.log('Model saved successfully:', response);
+  //       this.cancelAdding();
+  //       this.Refresh.emit();
+  //     }, error => {
+  //       console.error('Error saving model:', error);
+  //     });
+  // }
+  // ADDITION WITH A LINK
 }

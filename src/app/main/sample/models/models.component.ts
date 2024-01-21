@@ -21,9 +21,7 @@ export class ModelsComponent implements OnInit {
   {
     this.getModels()
   }
-  handleCancelEvent(val:boolean){
-    this.showInputs=val;
-  }
+
   toggleAddModel(){
     this.showInputs=!this.showInputs;
   }
@@ -41,6 +39,16 @@ export class ModelsComponent implements OnInit {
     .catch(error => {
       console.error('Error fetching data:', error);
     });
+  }
+  deleteModel(id : string)
+  {
+      fetch('http://127.0.0.1:8000/models/'+id, {
+        method: 'DELETE'
+      }).then(response => {
+        console.log('Model Deleted successfully:', response);
+        this.getModels()
+
+      })
   }
 
   showDescription(id : string)
