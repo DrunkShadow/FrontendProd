@@ -5,26 +5,7 @@
     <div>
         <button (click)="toggleAddModel()">Add Model</button>
         <div *ngIf="showInputs">
-            <select [(ngModel)]="selectObjects" multiple>
-                    <option *ngFor="let obj of keyObjectsArray" (click)="onChosen(obj.concernedObject)">{{obj.concernedObject}}</option>
-            </select>
-
-            <div class="table-container">
-                <table *ngFor="let selectedObj of clickedObjects " class="side-by-side-table">
-                    <tr>{{ selectedObj }}</tr>
-                    <br>
-                    <tr *ngFor="let key of keywordsArray">
-                        <td *ngIf="key.concernedObject == selectedObj">{{'{{'}} {{key.value}} {{'}}'}}</td>
-                    </tr>
-                </table>
-            </div>
-
-            <input type="text" [(ngModel)]="inputModelId" placeholder="Model id" required>
-            <input type="text" [(ngModel)]="inputModelText" placeholder="Model Text" required>
-            <input type="text" [(ngModel)]="inputModelDiffusion" placeholder="Model Diffusion" required>
-            
-            <button (click)="saveModel()">Save</button>
-            <button (click)="toggleAddModel()">Cancel</button>
+            <app-model-creator (Cancel)="handleCancelEvent($event)"></app-model-creator>
         </div>
     </div>
 
