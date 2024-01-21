@@ -4,13 +4,19 @@
   <button (click)="quit()">X</button>
 
 <br>
+
 <div *ngIf="((+ImportedId) / 10000 < 1)">
-<button (click)="downloadPdf('Project_presentation',ImportedId)">Download presentation</button>
-</div>
-<div *ngIf="((+ImportedId) / 10000 >= 1)">
-<button (click)="downloadPdf('Certificate_of_attendance',ImportedId)">Download Certificate of attendance</button>
-<br>
-<button (click)="downloadPdf('Worker_presentation',ImportedId)">Download presentation</button>
+  <div *ngFor="let obj of modelsArray ">
+      <div *ngIf="obj.concernsProject">
+        <button (click)="downloadPdf(obj.id)">Download {{obj.id}}</button>
+      </div>
+  </div>
 </div>
 
- 
+<div *ngIf="((+ImportedId) / 10000 >= 1)">
+  <div *ngFor="let obj of modelsArray ">
+      <div *ngIf="obj.concernsWorker">
+        <button (click)="downloadPdf(obj.id)">Download {{obj.id}}</button>
+      </div>
+  </div>
+</div>

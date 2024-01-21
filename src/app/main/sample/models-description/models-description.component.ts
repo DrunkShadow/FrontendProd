@@ -1,4 +1,4 @@
-import { Component,Input,OnInit} from '@angular/core';
+import { Component,Input,OnInit,Output,EventEmitter} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -11,7 +11,9 @@ import { FormsModule } from '@angular/forms';
 })
 export class ModelsDescriptionComponent implements OnInit {
   @Input() desId: string = '';
+  @Output() closingSignal = new EventEmitter();
   chosenModel: any = {};
+  editingMode = false;
 
   ngOnInit()
   {
@@ -24,9 +26,12 @@ export class ModelsDescriptionComponent implements OnInit {
         this.chosenModel = data;
       })
   }
+  
+  sendSignal()
+  {
+    this.closingSignal.emit();
+  }
 
-
-  editingMode = false;
 
   startEditing() {
     this.editingMode = true;

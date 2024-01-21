@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModelsDescriptionComponent } from '../../sample/models-description/models-description.component';
 import { ModelCreatorComponent } from '../../sample/model-creator/model-creator.component';
-
+import { ConfirmationComponent } from '../../sample/confirmation/confirmation.component';
 @Component({
   selector: 'app-models',
   standalone: true,
-  imports: [CommonModule,ModelsDescriptionComponent,ModelCreatorComponent],
+  imports: [CommonModule,ModelsDescriptionComponent,ModelCreatorComponent,ConfirmationComponent],
   templateUrl: './models.component.html',
   styleUrls: ['./models.component.css']
 })
@@ -16,7 +16,11 @@ export class ModelsComponent implements OnInit {
 
   Description: boolean = false;
   modelId: string = '';
+  id: string =''
+  actionText: string =''
   showInputs=false;
+  showConfirmation=false;
+  toDelete = false
   ngOnInit()
   {
     this.getModels()
@@ -40,6 +44,31 @@ export class ModelsComponent implements OnInit {
       console.error('Error fetching data:', error);
     });
   }
+  toggleConfirmation(id:string){
+    this.showConfirmation=true;
+    this.actionText="delete the model?"
+    this.id= id;
+
+  }
+
+  showDescription(id : string)
+  {
+    this.modelId = id;
+    this.Description = !this.Description;
+
+  }
+
+  handelConfirmation(val:boolean){
+    if (val){
+      
+      this.deleteModel(this.id)
+      this.showConfirmation=false;
+    }
+    else{
+      this.showConfirmation=false;
+    }
+
+  }
   deleteModel(id : string)
   {
       fetch('http://127.0.0.1:8000/models/'+id, {
@@ -49,13 +78,6 @@ export class ModelsComponent implements OnInit {
         this.getModels()
 
       })
-  }
-
-  showDescription(id : string)
-  {
-    this.modelId = id;
-    this.Description = true;
-
   }
 
 

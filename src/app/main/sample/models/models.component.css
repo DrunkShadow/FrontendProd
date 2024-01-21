@@ -1,4 +1,4 @@
-app-models-description,app-model-creator{    
+app-models-description,app-model-creator,app-confirmation{    
     position: fixed;
     top: 0;
     left: 0;
@@ -13,7 +13,7 @@ app-models-description,app-model-creator{
     opacity: 0;
   }
   
-  app-models-description.show,app-model-creator {
+  app-models-description.show,app-model-creator,app-confirmation{
     visibility: visible;
     opacity: 1;
 

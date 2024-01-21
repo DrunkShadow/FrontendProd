@@ -19,7 +19,6 @@ import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample/sample.module';
 import { ModelsComponent } from './main/sample/models/models.component';
-import { ModelCreatorComponent } from './main/sample/model-creator/model-creator.component';
 
 const appRoutes: Routes = [
   {

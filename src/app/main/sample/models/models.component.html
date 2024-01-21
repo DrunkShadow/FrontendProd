@@ -16,13 +16,15 @@
 
     <td>{{element.id}} </td>
     <td><button (click)="showDescription(element.id)">view</button></td>
-    <td><button (click)="deleteModel(element.id)">delete</button></td>
+    <td><button (click)="toggleConfirmation(element.id)">delete</button></td>
 
 </tr>
 </table>
 <div *ngIf="Description">
-    <app-models-description [desId]="modelId" class="show"></app-models-description>
+    <app-models-description (closingSignal)="showDescription('')" [desId]="modelId" class="show"></app-models-description>
 </div>
 
-
+<div *ngIf="showConfirmation">
+    <app-confirmation [action]="actionText" (Confirmation)="handelConfirmation($event)"></app-confirmation>
+</div>
 </div>
