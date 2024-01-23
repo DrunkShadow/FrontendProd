@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ModelsDescriptionComponent } from '../../sample/models-description/models-description.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { ModelsService } from '../../../Services/models.service';
+import { KeywordService } from '../../../Services/keywords.service';
 
 @Component({
   selector: 'app-model-creator',
@@ -16,11 +18,9 @@ import { HttpClient } from '@angular/common/http';
 export class ModelCreatorComponent implements OnInit {
 
   keyObjectsArray : any[] = [];
-  selectObjects: string = '';
   clickedObjects: string[] = [];
   keywordsArray: any[] = [];
   Description: boolean = false;
-  constructor(private http: HttpClient) {}
   inputModelId :string ='';
   inputModelText :string ='';
   inputModelDiffusion :string ='';
@@ -28,6 +28,7 @@ export class ModelCreatorComponent implements OnInit {
   @Output() Cancel = new EventEmitter<any>();
   @Output() Refresh = new EventEmitter<any>();
 
+  constructor(private modelsService?: ModelsService, private keywordService?: KeywordService) {}
 
   ngOnInit()
   {
@@ -37,11 +38,9 @@ export class ModelCreatorComponent implements OnInit {
   
 
   getKeywords() {
-    fetch('http://127.0.0.1:8000/keywords')
-      .then(response => response.json())
-      .then(data => {
-        this.keywordsArray = data;
-      })
+    this.keywordService.getKeywords().then(data => {
+      this.keywordsArray = data || [];
+    });
 
   }
 
@@ -56,11 +55,9 @@ export class ModelCreatorComponent implements OnInit {
   }
 
   getDistinctConcernedObjects() {
-    fetch('http://127.0.0.1:8000/keywordsObjects')
-      .then(response => response.json())
-      .then(data => {
-        this.keyObjectsArray = data;
-      })
+    this.keywordService.getDistinctConcernedObjects().then(data => {
+      this.keyObjectsArray = data || [];
+    });
   }
 
   cancelAdding(){
@@ -76,18 +73,7 @@ export class ModelCreatorComponent implements OnInit {
     var workerExists = 0;
     if(this.clickedObjects.indexOf('project')>-1) projExists=1;
     if(this.clickedObjects.indexOf('worker')>-1) workerExists=1;
-    fetch(`http://127.0.0.1:8000/models`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ 
-        id: this.inputModelId,
-        text: this.inputModelText,
-        concernsProject: projExists,
-        concernsWorker: workerExists
-      }),
-    })
+    this.modelsService.AddModel(this.inputModelId,this.inputModelText,projExists,workerExists)
     .then(response => {
       console.log('Model saved successfully:', response);
       this.cancelAdding()
@@ -95,8 +81,6 @@ export class ModelCreatorComponent implements OnInit {
     }
     )
   }
-
-
 
 
   // saveModel() {
@@ -114,4 +98,5 @@ export class ModelCreatorComponent implements OnInit {
   //     });
   // }
   // ADDITION WITH A LINK
+
 }

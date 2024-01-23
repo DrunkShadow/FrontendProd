@@ -2,11 +2,12 @@ import { Component, Input, EventEmitter, Output,OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PdfService } from '../../../../pdf.service';
+import { ModelsService } from '../../../Services/models.service';
 
 @Component({
   selector: 'app-repbox',
   standalone: true,
-  imports: [CommonModule, FormsModule,],
+  imports: [CommonModule, FormsModule],
   templateUrl: './repbox.component.html',
   styleUrls: ['./repbox.component.css'],
   providers: [PdfService]
@@ -16,6 +17,7 @@ export class RepboxComponent implements OnInit{
   modelsArray :any[] = [];
   @Output() CloseButton: EventEmitter<boolean> = new EventEmitter();
   @Input() ImportedId: string = '';
+ constructor(private modelsService?: ModelsService, private pdfService?: PdfService) {}
 
   ngOnInit(): void {
     this.getModels()
@@ -27,7 +29,6 @@ export class RepboxComponent implements OnInit{
   emitEvent() {
     this.CloseButton.emit(false);
   }
-  constructor(private pdfService: PdfService) {}
 
   downloadPdf(modelId: string): void {
     this.pdfService.downloadPdf(modelId,this.ImportedId).subscribe((response) => {
@@ -41,18 +42,8 @@ export class RepboxComponent implements OnInit{
   }
 
   getModels() {
-    fetch('http://127.0.0.1:8000/models')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      this.modelsArray = data;
-    })
-    .catch(error => {
-      console.error('Error fetching data:', error);
+    this.modelsService.getModels().then(data => {
+      this.modelsArray = data || [];
     });
   }
 }

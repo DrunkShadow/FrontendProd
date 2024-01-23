@@ -1,6 +1,7 @@
 import { Component,Input,OnInit,Output,EventEmitter} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ModelsService } from '../../../Services/models.service';
 
 @Component({
   selector: 'app-models-description',
@@ -14,17 +15,16 @@ export class ModelsDescriptionComponent implements OnInit {
   @Output() closingSignal = new EventEmitter();
   chosenModel: any = {};
   editingMode = false;
+  constructor(private modelsService: ModelsService) {}
 
   ngOnInit()
   {
     this.getModelbyId()
   }
   getModelbyId() {
-    fetch(`http://127.0.0.1:8000/models/${this.desId}`)
-      .then(response => response.json())
-      .then(data => {
-        this.chosenModel = data;
-      })
+    this.modelsService.getModelbyId(this.desId).then(data => {
+      this.chosenModel = data || [];
+  })
   }
   
   sendSignal()

@@ -1,7 +1,11 @@
 <div class="container">
-    <select [(ngModel)]="selectObjects" multiple>
-        <option *ngFor="let obj of keyObjectsArray" (click)="onChosen(obj.concernedObject)">{{obj.concernedObject}}</option>
-</select>
+
+    <input *ngFor="let obj of keyObjectsArray" 
+       (click)="onChosen(obj.concernedObject)" 
+       [ngClass]="{'highlighted': clickedObjects.includes(obj.concernedObject)}"
+       value="{{obj.concernedObject}}" 
+       type="button">
+
 
 <div class="table-container">
     <table *ngFor="let selectedObj of clickedObjects " class="side-by-side-table">
@@ -14,8 +18,9 @@
 </div>
 
 <input type="text" [(ngModel)]="inputModelId" placeholder="Model id" required>
-<input type="text" [(ngModel)]="inputModelText" placeholder="Model Text" required>
-
+<br>
+<textarea type="text" id="mainText" [(ngModel)]="inputModelText" placeholder="Model Text" style="white-space: pre-wrap;" required></textarea>
+<br>
 <button (click)="saveModel()">Save</button>
 <button (click)="cancelAdding()">Cancel</button>
 
