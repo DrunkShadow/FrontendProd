@@ -10,7 +10,7 @@ export class PdfService {
 
   constructor(private http: HttpClient) {}
 
-  downloadPdf(modelId: string,id:string): Observable<Blob> {
+  downloadPdf(modelId: string,id:string, ): Observable<Blob> {
     const urlWithModelId = `${this.apiUrl}/${modelId}/${id}`;
     return this.http.get(urlWithModelId, { responseType: 'blob' });
   }

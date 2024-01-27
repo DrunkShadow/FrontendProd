@@ -24,7 +24,7 @@ export class ModelCreatorComponent implements OnInit {
   inputModelId :string ='';
   inputModelText :string ='';
   inputModelDiffusion :string ='';
-
+  isEmail : boolean = false;
   @Output() Cancel = new EventEmitter<any>();
   @Output() Refresh = new EventEmitter<any>();
 
@@ -69,11 +69,13 @@ export class ModelCreatorComponent implements OnInit {
 
 
   saveModel() {
+    var isEmail = 0;
     var projExists=0;
     var workerExists = 0;
+    if(this.isEmail) isEmail=1;
     if(this.clickedObjects.indexOf('project')>-1) projExists=1;
     if(this.clickedObjects.indexOf('worker')>-1) workerExists=1;
-    this.modelsService.AddModel(this.inputModelId,this.inputModelText,projExists,workerExists)
+    this.modelsService.AddModel(this.inputModelId,this.inputModelText,projExists,workerExists,isEmail)
     .then(response => {
       console.log('Model saved successfully:', response);
       this.cancelAdding()

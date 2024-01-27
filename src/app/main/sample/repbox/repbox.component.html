@@ -1,27 +1,51 @@
-
-
 <div id="box">
+  <div *ngIf="isMail; else isNotMail">
+    <div id="allButtons">
+      <div *ngIf="+chosenEntityId / 10000 >= 1">
+          <div class="container">
+            <table>
+              Attachements files available
+            <div *ngFor="let obj of modelsArray">
+              <div class="side-by-side" *ngIf="obj.concernsWorker && !obj.concernsEmail">
+                  <tr><td>attach {{ obj.id }} </td> <td><input type="checkbox"  (click)="saveModelToAttach(obj.id)" /></td> 
+              </div>
+            </div>
+          </table>
 
- <br>
-  <div id="allButtons">
-    <div *ngIf="((+ImportedId) / 10000 < 1)">
-      <div *ngFor="let obj of modelsArray ">
-        <div *ngIf="obj.concernsProject">
-          <button (click)="downloadPdf(obj.id)">Download {{obj.id}}</button>
+          <table>
+            email models available
+            <div *ngFor="let obj of modelsArray">
+                <div class="side-by-side" *ngIf="obj.concernsEmail && obj.concernsWorker">
+                  <tr><td>send {{ obj.id }} </td> <td><input type="radio" name="email" (click)="saveModelToSend(obj.id)" /></td></tr>
+                </div>
+              </div>
+          </table>
         </div>
+        <button (click)="sendEmail(modelToSend,modelToAttach)">Send Mail</button>
+      </div>
+      <button id="exit" (click)="quit()">close</button>
     </div>
   </div>
 
-<div *ngIf="((+ImportedId) / 10000 >= 1)">
-  <div *ngFor="let obj of modelsArray ">
-      <div *ngIf="obj.concernsWorker">
-        <button (click)="downloadPdf(obj.id)">Download {{obj.id}}</button>
+  <ng-template #isNotMail>
+    <br />
+    <div id="allButtons">
+      <div *ngIf="+chosenEntityId / 10000 < 1">
+        <div *ngFor="let obj of modelsArray">
+          <div *ngIf="obj.concernsProject">
+            <button (click)="downloadPdf(obj.id)">Download {{ obj.id }}</button>
+          </div>
+        </div>
       </div>
-  </div>
-</div>
-<button id="exit" (click)="quit()">close</button>
 
-</div>
-
-
+      <div *ngIf="+chosenEntityId / 10000 >= 1">
+        <div *ngFor="let obj of modelsArray">
+          <div *ngIf="obj.concernsWorker">
+            <button (click)="downloadPdf(obj.id)">Download {{ obj.id }}</button>
+          </div>
+        </div>
+      </div>
+      <button id="exit" (click)="quit()">close</button>
+    </div>
+  </ng-template>
 </div>

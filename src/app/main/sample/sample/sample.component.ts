@@ -16,7 +16,7 @@ export class SampleComponent {
   showTable2: boolean = false;
   showRepbox: boolean = false;
   elementId: string = '';
-
+  isMail=false;
   constructor(
     private workersService: WorkersService,
     private projectsService: ProjectsService
@@ -27,9 +27,10 @@ export class SampleComponent {
     this.getWorkers();
   }
 
-  toggleRepbox(id: string) {
+  toggleRepbox(id: string,isMail: boolean) {
     this.elementId = id;
     this.showRepbox = true;
+    this.isMail=isMail;
   }
 
   handleCloseButtonEvent(value: boolean) {
