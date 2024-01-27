@@ -1,9 +1,9 @@
 <div class="container">
 
     <input *ngFor="let obj of keyObjectsArray" 
-       (click)="onChosen(obj.concernedObject)" 
-       [ngClass]="{'highlighted': clickedObjects.includes(obj.concernedObject)}"
-       value="{{obj.concernedObject}}" 
+       (click)="onChosen(obj.keywordConcernedObject)" 
+       [ngClass]="{'highlighted': clickedObjects.includes(obj.keywordConcernedObject)}"
+       value="{{obj.keywordConcernedObject}}" 
        type="button">
 
 
@@ -12,7 +12,7 @@
         <tr>{{ selectedObj }}</tr>
         <br>
         <tr *ngFor="let key of keywordsArray">
-            <td *ngIf="key.concernedObject == selectedObj">{{'{{'}} {{key.value}} {{'}}'}}</td>
+            <td *ngIf="key.keywordConcernedObject == selectedObj">{{'{{'}} {{key.keywordValue}} {{'}}'}}</td>
         </tr>
     </table>
 </div>

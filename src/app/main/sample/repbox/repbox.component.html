@@ -6,17 +6,18 @@
             <table>
               Attachements files available
             <div *ngFor="let obj of modelsArray">
-              <div class="side-by-side" *ngIf="obj.concernsWorker && !obj.concernsEmail">
-                  <tr><td>attach {{ obj.id }} </td> <td><input type="checkbox"  (click)="saveModelToAttach(obj.id)" /></td> 
+              <div class="side-by-side" *ngIf="obj.modelConcernsWorker && !obj.modelConcernsEmail">
+                  <tr><td>attach {{ obj.modelId }} </td> <td><input type="checkbox"  (click)="saveModelToAttach(obj.modelId)" /></td> 
               </div>
             </div>
           </table>
 
           <table>
-            email models available
+            Attachements files available
+
             <div *ngFor="let obj of modelsArray">
-                <div class="side-by-side" *ngIf="obj.concernsEmail && obj.concernsWorker">
-                  <tr><td>send {{ obj.id }} </td> <td><input type="radio" name="email" (click)="saveModelToSend(obj.id)" /></td></tr>
+                <div class="side-by-side" *ngIf="obj.modelConcernsEmail && obj.modelConcernsWorker">
+                  <tr><td>send {{ obj.modelId }} </td> <td><input type="radio" name="email" (click)="saveModelToSend(obj.modelId)" /></td></tr>
                 </div>
               </div>
           </table>
@@ -32,16 +33,16 @@
     <div id="allButtons">
       <div *ngIf="+chosenEntityId / 10000 < 1">
         <div *ngFor="let obj of modelsArray">
-          <div *ngIf="obj.concernsProject">
-            <button (click)="downloadPdf(obj.id)">Download {{ obj.id }}</button>
+          <div *ngIf="obj.modelConcernsProject">
+            <button (click)="downloadPdf(obj.modelId)">Download {{ obj.modelId }}</button>
           </div>
         </div>
       </div>
 
       <div *ngIf="+chosenEntityId / 10000 >= 1">
         <div *ngFor="let obj of modelsArray">
-          <div *ngIf="obj.concernsWorker">
-            <button (click)="downloadPdf(obj.id)">Download {{ obj.id }}</button>
+          <div *ngIf="obj.modelConcernsWorker">
+            <button (click)="downloadPdf(obj.modelId)">Download {{ obj.modelId }}</button>
           </div>
         </div>
       </div>

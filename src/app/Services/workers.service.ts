@@ -1,11 +1,10 @@
-
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WorkersService {
-  private baseUrl = 'http://127.0.0.1:8000/workers';
+  private baseUrl = 'http://127.0.0.1:8000/workers/';
 
   constructor() {}
 
@@ -18,6 +17,7 @@ export class WorkersService {
         return response.json();
       })
       .catch(error => {
+        alert(error)
         console.error('Error fetching data:', error);
       });
   }

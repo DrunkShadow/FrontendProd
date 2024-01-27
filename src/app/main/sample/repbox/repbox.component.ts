@@ -62,6 +62,7 @@ export class RepboxComponent implements OnInit{
       this.modelsArray = data || [];
     });
   }
+  
   saveModelToAttach(selectedObjId: string) {
     const index = this.modelsToAttach.indexOf(selectedObjId);
     if (index !== -1) {

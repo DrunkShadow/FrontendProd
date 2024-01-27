@@ -45,7 +45,7 @@ export class ModelsDescriptionComponent implements OnInit {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ text: this.chosenModel.text }),
+      body: JSON.stringify({ modelText: this.chosenModel.modelText }),
     });
   }
     

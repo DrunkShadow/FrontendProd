@@ -14,9 +14,9 @@
 <table>
 <tr *ngFor="let element of modelsArray">
 
-    <td>{{element.id}} </td>
-    <td><button (click)="showDescription(element.id)">view</button></td>
-    <td><button (click)="toggleConfirmation(element.id)">delete</button></td>
+    <td>{{element.modelId}} </td>
+    <td><button (click)="showDescription(element.modelId)">view</button></td>
+    <td><button (click)="toggleConfirmation(element.modelId)">delete</button></td>
 
 </tr>
 </table>

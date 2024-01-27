@@ -29,8 +29,8 @@ export class ModelsService {
     });
   }
 
-  getModelbyId(id:string) {
-    return fetch(`${this.baseUrl}/${id}`)
+  getModelbyId(modelId:string) {
+    return fetch(`${this.baseUrl}/${modelId}`)
       .then(response => response.json())
   }
   AddModel(inputModelId:string,inputModelText:string,projExists:number,workerExists : number,isEmail:number){
@@ -40,11 +40,11 @@ export class ModelsService {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ 
-        id: inputModelId,
-        text: inputModelText,
-        concernsProject: projExists,
-        concernsWorker: workerExists,
-        concernsEmail:isEmail
+        modelId: inputModelId,
+        modelText: inputModelText,
+        modelConcernsProject: projExists,
+        modelConcernsWorker: workerExists,
+        modelConcernsEmail:isEmail
       }),
     })
   }
