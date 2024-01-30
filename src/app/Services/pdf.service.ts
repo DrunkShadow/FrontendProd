@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PdfService {
-  private apiUrl = 'http://127.0.0.1:8000/services/downloadPDF';
+  private apiUrl = 'http://127.0.0.1:8000/pdf/downloadPDF';
 
   constructor(private http: HttpClient) {}
 
@@ -14,4 +14,5 @@ export class PdfService {
     const urlWithModelId = `${this.apiUrl}/${modelId}/${id}`;
     return this.http.get(urlWithModelId, { responseType: 'blob' });
   }
+
 }

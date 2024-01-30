@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class EmailService {
-    private baseUrl = 'http://127.0.0.1:8000/services';
+    private baseUrl = 'http://127.0.0.1:8000/email';
 
   constructor(private http: HttpClient) {}
 
@@ -17,6 +17,73 @@ export class EmailService {
     console.log(parameters);
 
     return this.http.get<string>(url,{ params: parameters });
-
   }
+
+  getEmails() {
+    return fetch(this.baseUrl)
+    .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }
+
+  getEmailById(id : string) {
+    return fetch(this.baseUrl+'/'+ id)
+    .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }
+
+  getAttachments() {
+    return fetch(this.baseUrl+'/attachments/all')
+    .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }
+
+  getAttachmentsById(id: string) {
+    return fetch(this.baseUrl+'/attachments/byId/'+id)
+    .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }
+
+  getAttachmentsByEmailId(EmailId: string) {
+    return fetch("http://127.0.0.1:8000/email/attachments/byEmailId/"+EmailId)
+    .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }
+
+
+
 }

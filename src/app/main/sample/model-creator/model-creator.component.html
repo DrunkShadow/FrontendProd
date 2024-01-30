@@ -12,7 +12,7 @@
         <tr>{{ selectedObj }}</tr>
         <br>
         <tr *ngFor="let key of keywordsArray">
-            <td *ngIf="key.keywordConcernedObject == selectedObj">{{'{{'}} {{key.keywordValue}} {{'}}'}}</td>
+            <td *ngIf="key.keywordConcernedObject == selectedObj"> {{key.keywordValue}} </td>
         </tr>
     </table>
 </div>

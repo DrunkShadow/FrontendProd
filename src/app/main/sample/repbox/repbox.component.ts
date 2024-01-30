@@ -29,9 +29,6 @@ export class RepboxComponent implements OnInit{
   }
   quit()
   {
-    this.emitEvent();
-  }
-  emitEvent() {
     this.CloseButton.emit(false);
   }
 
@@ -48,7 +45,6 @@ export class RepboxComponent implements OnInit{
 
   downloadPdf(modelId: string): void {
     this.pdfService.downloadPdf(modelId,this.chosenEntityId).subscribe((response) => {
-      console.log(modelId + this.chosenEntityId);
       const blob = new Blob([response], { type: 'application/pdf' });
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);

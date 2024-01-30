@@ -1,0 +1,11 @@
+<div id="box">
+ <div [innerHTML]="chosenEmail.emailText"></div>
+<div>
+  <span *ngFor="let attachment of attArray">
+    <br>
+      <a href="{{attachment.attachmentFilePath}}" target="_blank">{{attachment.attachmentName}}</a>
+  </span>
+</div>
+<button id="exit" (click)="quit()">close</button>
+
+</div>

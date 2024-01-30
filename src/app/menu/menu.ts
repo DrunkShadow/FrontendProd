@@ -3,7 +3,7 @@ import { CoreMenu } from '@core/types'
 export const menu: CoreMenu[] = [
   {
     id: 'sample',
-    title: 'Projects',
+    title: 'Objects',
     translate: 'MENU.SAMPLE',
     type: 'item',
     icon: 'file',
@@ -14,5 +14,11 @@ export const menu: CoreMenu[] = [
     title: 'Models',
     type: 'item',
     url: 'model'
+  },
+  {
+    id: 'EmailHistory',
+    title: 'Email History',
+    type: 'item',
+    url: 'History'
   },
 ]

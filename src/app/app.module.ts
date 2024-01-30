@@ -19,6 +19,7 @@ import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample/sample.module';
 import { ModelsComponent } from './main/sample/models/models.component';
+import { EmailHistoryComponent } from './main/sample/email-history/email-history.component';
 
 const appRoutes: Routes = [
   {
@@ -29,6 +30,11 @@ const appRoutes: Routes = [
     path: 'model',  
     component: ModelsComponent
   },
+  {
+    path: 'History',  
+    component: EmailHistoryComponent
+  },
+  
   {
     path: '',
     redirectTo: '/sample',
