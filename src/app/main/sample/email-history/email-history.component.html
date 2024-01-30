@@ -6,6 +6,7 @@
             <td>Source email</td>
             <td>Target email</td>
             <td>Subject</td>
+            <td>Sent at</td>
           </tr>
         </thead>
         <tbody>
@@ -14,6 +15,8 @@
             <td>{{ email.emailSource }}</td>
             <td>{{ email.emailTarget }}</td>
             <td>{{ email.emailSubject }}</td>
+            <td>{{ email.emailDate | date: 'dd-MM-yyyy HH:mm:ss' }}</td>
+
           </tr>
         </tbody>
       </table>

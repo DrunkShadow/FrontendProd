@@ -33,7 +33,7 @@ export class ModelsService {
     return fetch(`${this.baseUrl}/${modelId}`)
       .then(response => response.json())
   }
-  AddModel(inputModelId:string,inputModelText:string,projExists:number,workerExists : number,isEmail:number){
+  AddModel(inputModelId:string,inputModelText:string,projExists:number,workerExists : number,isEmail:number,modelsToAttach :string[]){
     return fetch(`http://127.0.0.1:8000/models`, {
       method: 'POST',
       headers: {
@@ -44,7 +44,8 @@ export class ModelsService {
         modelText: inputModelText,
         modelConcernsProject: projExists,
         modelConcernsWorker: workerExists,
-        modelConcernsEmail:isEmail
+        modelConcernsEmail:isEmail,
+        modelEmailAttachment:modelsToAttach
       }),
     })
   }

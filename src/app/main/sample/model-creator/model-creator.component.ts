@@ -18,13 +18,16 @@ import { KeywordService } from '../../../Services/keywords.service';
 export class ModelCreatorComponent implements OnInit {
 
   keyObjectsArray : any[] = [];
+
   clickedObjects: string[] = [];
   keywordsArray: any[] = [];
+  modelsArray: any[] = [];
   Description: boolean = false;
   inputModelId :string ='';
   inputModelText :string ='';
   inputModelDiffusion :string ='';
   isEmail : boolean = false;
+  modelsToAttach : string[] = [];
   @Output() Cancel = new EventEmitter<any>();
   @Output() Refresh = new EventEmitter<any>();
 
@@ -34,6 +37,7 @@ export class ModelCreatorComponent implements OnInit {
   {
     this.getKeywords()
     this.getDistinctConcernedObjects()
+    this.getModels()
   }
   
 
@@ -54,6 +58,14 @@ export class ModelCreatorComponent implements OnInit {
     }  
   }
 
+  getModels(){
+    this.modelsService.getModels().then(data => {
+      this.modelsArray = data || [];
+    });
+  }
+
+  
+
   getDistinctConcernedObjects() {
     this.keywordService.getDistinctConcernedObjects().then(data => {
       this.keyObjectsArray = data || [];
@@ -67,6 +79,15 @@ export class ModelCreatorComponent implements OnInit {
     this.Cancel.emit();
   }
 
+  saveModelToAttach(selectedObjId: string) {
+    const index = this.modelsToAttach.indexOf(selectedObjId);
+    if (index !== -1) {
+      this.modelsToAttach.splice(index, 1);
+    } else {
+      this.modelsToAttach.push(selectedObjId);
+    }
+  }
+
 
   saveModel() {
     var isEmail = 0;
@@ -75,7 +96,7 @@ export class ModelCreatorComponent implements OnInit {
     if(this.isEmail) isEmail=1;
     if(this.clickedObjects.indexOf('project')>-1) projExists=1;
     if(this.clickedObjects.indexOf('worker')>-1) workerExists=1;
-    this.modelsService.AddModel(this.inputModelId,this.inputModelText,projExists,workerExists,isEmail)
+    this.modelsService.AddModel(this.inputModelId,this.inputModelText,projExists,workerExists,isEmail,this.modelsToAttach)
     .then(response => {
       console.log('Model saved successfully:', response);
       this.cancelAdding()

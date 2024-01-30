@@ -19,6 +19,16 @@
 
 is this an Email? <input type="checkbox" [(ngModel)]="isEmail" >
 <br>
+<div *ngIf="isEmail">
+    <table>
+        Attachements files available
+      <div *ngFor="let obj of modelsArray">
+        <div class="side-by-side" *ngIf="!obj.modelConcernsEmail">
+            <tr><td>attach {{ obj.modelId }} </td> <td><input type="checkbox"  (click)="saveModelToAttach(obj.modelId)" /></td> 
+        </div>
+      </div>
+    </table>
+</div>
 <input type="text" [(ngModel)]="inputModelId" placeholder="Model id" required>
 <br>
 <textarea type="text" id="mainText" [(ngModel)]="inputModelText" placeholder="Model Text" style="white-space: pre-wrap;" required></textarea>

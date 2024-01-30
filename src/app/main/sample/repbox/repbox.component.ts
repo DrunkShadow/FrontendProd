@@ -33,7 +33,7 @@ export class RepboxComponent implements OnInit{
   }
 
   sendEmail(){
-    this.emailService.sendEmail(this.emailModelId, this.chosenEntityId,this.modelsToAttach).subscribe(
+    this.emailService.sendEmail(this.emailModelId, this.chosenEntityId).then(
       (response) => {
         console.log('Email sent successfully:', response);
       },
@@ -57,17 +57,6 @@ export class RepboxComponent implements OnInit{
     this.modelsService.getModels().then(data => {
       this.modelsArray = data || [];
     });
-  }
-  
-  saveModelToAttach(selectedObjId: string) {
-    const index = this.modelsToAttach.indexOf(selectedObjId);
-    if (index !== -1) {
-      this.modelsToAttach.splice(index, 1);
-    } else {
-      this.modelsToAttach.push(selectedObjId);
-    }
-    console.log(this.modelsToAttach)
-
   }
   saveModelToSend(id:string)
   {

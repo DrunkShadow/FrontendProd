@@ -3,18 +3,9 @@
     <div id="allButtons">
       <div *ngIf="+chosenEntityId / 10000 >= 1">
           <div class="container">
-            <table>
-              Attachements files available
-            <div *ngFor="let obj of modelsArray">
-              <div class="side-by-side" *ngIf="obj.modelConcernsWorker && !obj.modelConcernsEmail">
-                  <tr><td>attach {{ obj.modelId }} </td> <td><input type="checkbox"  (click)="saveModelToAttach(obj.modelId)" /></td> 
-              </div>
-            </div>
-          </table>
 
           <table>
-            Attachements files available
-
+            Email models available
             <div *ngFor="let obj of modelsArray">
                 <div class="side-by-side" *ngIf="obj.modelConcernsEmail && obj.modelConcernsWorker">
                   <tr><td>send {{ obj.modelId }} </td> <td><input type="radio" name="email" (click)="saveModelToSend(obj.modelId)" /></td></tr>
