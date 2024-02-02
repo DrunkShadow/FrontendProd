@@ -28,6 +28,8 @@ export class MaterielleComponent implements OnInit {
   isEditingWidth: boolean = false;
   isEditingPerRow: boolean = false;
   materielleArray: any[] = [];
+  categoriesArray: any[] = [];
+  chosenCat : string ='All';
   showTable: boolean = false;
   numberOfBarCodes : number;
   constructor(
@@ -38,7 +40,7 @@ export class MaterielleComponent implements OnInit {
   
   ngOnInit(): void {
     this.getMaterielle();
-    
+    this.getDistinctCategories()
 
   }
   togglePopup(): void {
@@ -51,6 +53,7 @@ export class MaterielleComponent implements OnInit {
       this.numberOfBarCodes = this.materielleArray.length;
     });
   }
+  
   deleteMaterielle(reference: string){
     this.materielleService.deleteMaterielle(reference).then(() => {
       this.getMaterielle();
@@ -97,10 +100,14 @@ export class MaterielleComponent implements OnInit {
       this.  resetValues()
     });
   }
-
+  getDistinctCategories(){
+    this.materielleService.getDistinctCategories().then(data => {
+      this.categoriesArray = data || [];
+    });
+  }
   downloadBarCode(ref :string){
 
-    this.pdfService.downloadBarPdf(ref,this.height,this.width,this.perRow).subscribe((response) => {
+    this.pdfService.downloadBarPdf(ref,this.height,this.width,this.perRow,this.chosenCat).subscribe((response) => {
       const blob = new Blob([response], { type: 'application/pdf' });
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);

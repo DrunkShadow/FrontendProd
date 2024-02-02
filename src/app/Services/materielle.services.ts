@@ -28,9 +28,13 @@ export class MaterielleService {
       console.log("Model Deleted successfully:", response);
     });
   }
-
   getMaterielleById(idMaterielle: string) {
     return fetch(`${this.baseUrl}/${idMaterielle}`).then((response) =>
+      response.json()
+    );
+  }
+  getDistinctCategories() {
+    return fetch(this.baseUrl+'/Categories/distinct').then((response) =>
       response.json()
     );
   }
@@ -57,4 +61,27 @@ export class MaterielleService {
       }),
     });
   }
+  updateMaterielle(
+    reference: string,
+    title: string,
+    description: string,
+    price: string,
+    date: string,
+    category: string)
+    {
+        fetch(`${this.baseUrl}/update/${reference}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            titre: title,
+            description: description,
+            categorie: category,
+            prix: price,
+            date: date
+          }),
+        });
+      }
 }
+

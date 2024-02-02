@@ -3,7 +3,7 @@
   </button>
   
   <button class="btn btn-outline-primary" (click)="downloadBarCode('0')">
-    download All barcodes
+    download The barcodes
   </button>
   <br><br>
 
@@ -20,14 +20,19 @@
     </div>
     <input *ngIf="isEditingWidth" type="text" [(ngModel)]="width" (blur)="stopEditing('width')">
 
-    <label style="margin-left: 20px; margin-right: 10px;">perRow:</label>
+    <label style="margin-left: 20px; margin-right: 10px;">Barcodes per row:</label>
     <div *ngIf="!isEditingPerRow" (dblclick)="startEditing('perRow')">
         {{ perRow }}
     </div>
     <input *ngIf="isEditingPerRow" type="text" [(ngModel)]="perRow" (blur)="stopEditing('perRow')">
-</div>
-please note that each barcode block is about 200x250px recommended values for {{ perRow }} bars in each row are: height {{calculateHeight()}} and width: {{calculateWidth()}}
 
+    <select id="selector" [(ngModel)]="chosenCat">
+      <option>All</option>
+       <option *ngFor="let row of categoriesArray">{{row.categorie}}</option>
+    </select>
+
+</div>
+please note that each barcode block is about 200x250px. Recommended minimal values for {{ perRow }} bars in each row are: height {{calculateHeight()}} and width: {{calculateWidth()}}
 <br>
 <br>
 
@@ -91,3 +96,5 @@ please note that each barcode block is about 200x250px recommended values for {{
 </table>
 
 </div>
+
+
