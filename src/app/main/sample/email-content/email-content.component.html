@@ -1,11 +1,16 @@
 <div id="box">
- <div [innerHTML]="chosenEmail.emailText"></div>
+  <p>Email Text: </p>
+  <div class="bordered" [innerHTML]="chosenEmail.emailText"></div>
+
 <div>
+  <br>
+  <p>Attached files:</p>
   <span *ngFor="let attachment of attArray">
-    <br>
       <a href="{{attachment.attachmentFilePath}}" target="_blank">{{attachment.attachmentName}}</a>
+      <br>
   </span>
 </div>
-<button id="exit" (click)="quit()">close</button>
+<br>
+<button class="btn btn-danger" id="exit" (click)="quit()">close</button>
 
 </div>

@@ -15,4 +15,9 @@ export class PdfService {
     return this.http.get(urlWithModelId, { responseType: 'blob' });
   }
 
+  downloadBarPdf(reference: string,height:number,width:number,perRow:number ): Observable<Blob> {
+    const urlWithModelId = `${this.apiUrl}/${reference}/${height}/${width}/${perRow}`;
+    return this.http.get(urlWithModelId, { responseType: 'blob' });
+  }
+
 }

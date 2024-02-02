@@ -20,6 +20,7 @@ import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample/sample.module';
 import { ModelsComponent } from './main/sample/models/models.component';
 import { EmailHistoryComponent } from './main/sample/email-history/email-history.component';
+import { MaterielleComponent } from './main/sample/materielle/materielle.component';
 
 const appRoutes: Routes = [
   {
@@ -33,6 +34,10 @@ const appRoutes: Routes = [
   {
     path: 'History',  
     component: EmailHistoryComponent
+  },
+  {
+    path: 'Materielle',  
+    component: MaterielleComponent
   },
   
   {

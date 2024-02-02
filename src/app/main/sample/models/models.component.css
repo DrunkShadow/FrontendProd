@@ -19,3 +19,8 @@ app-models-description,app-model-creator,app-confirmation{
 
   }
   
+  button{
+    margin-right: 2px;
+    margin-left: 2px;
+  }
+  

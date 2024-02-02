@@ -1,8 +1,4 @@
-.long-button {
-  width: 100%; 
-  border-radius: 5px;
-  border: 0.5px solid ;
-}
+
 
 table {
   width: 100%;
@@ -14,7 +10,7 @@ table {
 
 th, td {
   border: 1px solid #dddddd;
-  text-align: left;
+  text-align: center;
   padding: 8px;
 }
 
@@ -45,4 +41,9 @@ app-repbox {
 app-repbox.show {
   visibility: visible;
   opacity: 1;
+}
+button{
+  margin-right: 2px;
+  margin-left: 2px;
+
 }

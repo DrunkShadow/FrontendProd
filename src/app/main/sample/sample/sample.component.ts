@@ -12,14 +12,17 @@ import { ProjectsService } from '../../../Services/projects.service'
 export class SampleComponent {
   projectsArray: any[] = [];
   workersArray: any[] = [];
+
+
   showTable1: boolean = false;
   showTable2: boolean = false;
   showRepbox: boolean = false;
   elementId: string = '';
   isMail=false;
+
   constructor(
     private workersService: WorkersService,
-    private projectsService: ProjectsService
+    private projectsService: ProjectsService,
   ) {}
 
   ngOnInit() {
@@ -53,4 +56,5 @@ export class SampleComponent {
       this.workersArray = data || [];
     });
   }
+
 }

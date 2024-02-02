@@ -21,4 +21,10 @@ export const menu: CoreMenu[] = [
     type: 'item',
     url: 'History'
   },
+  {
+    id: 'Materielle',
+    title: 'Materielle',
+    type: 'item',
+    url: 'Materielle'
+  },
 ]

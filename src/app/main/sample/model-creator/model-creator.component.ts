@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { ModelsService } from '../../../Services/models.service';
 import { KeywordService } from '../../../Services/keywords.service';
 
+
 @Component({
   selector: 'app-model-creator',
   standalone: true,
@@ -15,10 +16,9 @@ import { KeywordService } from '../../../Services/keywords.service';
   styleUrls: ['./model-creator.component.scss']
 })
 
-export class ModelCreatorComponent implements OnInit {
+export class ModelCreatorComponent implements OnInit{
 
   keyObjectsArray : any[] = [];
-
   clickedObjects: string[] = [];
   keywordsArray: any[] = [];
   modelsArray: any[] = [];
@@ -48,14 +48,17 @@ export class ModelCreatorComponent implements OnInit {
 
   }
 
-
+  getFirstWord(modelId: string): string {
+    return modelId ? modelId.split(' ')[0] : '';
+    }
   onChosen(selectedObjName: string) {
     const index = this.clickedObjects.indexOf(selectedObjName);
     if (index !== -1) {
       this.clickedObjects.splice(index, 1);
     } else {
       this.clickedObjects.push(selectedObjName);
-    }  
+    }
+    console.log(this.clickedObjects)  
   }
 
   getModels(){

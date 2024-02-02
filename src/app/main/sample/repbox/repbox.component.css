@@ -3,9 +3,12 @@ textarea {
   height: 5rem;
   resize: vertical;
   margin: 10px;
+  border-radius: 10px;
+
 }
 
 #box {
+  padding: 20px 50px;
   background-color: white;
 }
 
@@ -14,7 +17,6 @@ textarea {
   align-items: center;
   justify-content: center;
   text-align: center;
-  position: fixed;
 }
 
 button {
@@ -58,4 +60,10 @@ tr:hover {
 
 .side-by-side {
   margin-right: 10px; 
+}
+
+button{
+  margin-right: 2px;
+  margin-left: 2px;
+
 }

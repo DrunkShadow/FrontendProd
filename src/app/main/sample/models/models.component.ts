@@ -6,7 +6,6 @@ import { ModelsDescriptionComponent } from '../../sample/models-description/mode
 import { ModelCreatorComponent } from '../../sample/model-creator/model-creator.component';
 import { ConfirmationComponent } from '../../sample/confirmation/confirmation.component';
 import { ModelsService } from '../../../Services/models.service';
-
 @Component({
   selector: 'app-models',
   standalone: true,

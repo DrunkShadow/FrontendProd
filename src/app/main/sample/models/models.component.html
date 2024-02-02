@@ -3,7 +3,7 @@
 <div>
 
     <div>
-        <button (click)="toggleAddModel()">Add Model</button>
+        <button class="btn btn-success" (click)="toggleAddModel()">Add a model</button>
         <div *ngIf="showInputs">
             <app-model-creator (Cancel)="toggleAddModel()" (Refresh)="getModels()"></app-model-creator>
         </div>
@@ -15,8 +15,8 @@
 <tr *ngFor="let element of modelsArray">
 
     <td>{{element.modelId}} </td>
-    <td><button (click)="showDescription(element.modelId)">view</button></td>
-    <td><button (click)="toggleConfirmation(element.modelId)">delete</button></td>
+    <td><button class="btn btn-primary" (click)="showDescription(element.modelId)">view</button></td>
+    <td><button class="btn btn-danger" (click)="toggleConfirmation(element.modelId)">delete</button></td>
 
 </tr>
 </table>

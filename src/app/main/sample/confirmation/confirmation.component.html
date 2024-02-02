@@ -1,4 +1,5 @@
 <div class="container">
 <h3> Are you sure you want to {{ action }} <br> this action cannot be undone</h3>
-<button (click)="ConfirmAction(true)"> Confirm </button> <button (click)="ConfirmAction(false)"> Cancel </button>
+<br>
+<button class="btn btn-outline-success" (click)="ConfirmAction(true)"> Confirm </button> <button class="btn btn-danger" (click)="ConfirmAction(false)"> Cancel </button>
 </div>

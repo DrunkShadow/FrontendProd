@@ -17,24 +17,33 @@
     </table>
 </div>
 
-is this an Email? <input type="checkbox" [(ngModel)]="isEmail" >
+    <div class="custom-control custom-control-primary custom-switch">
+        <p class="mb-50">is this an Email? </p>
+        <input type="checkbox" checked class="custom-control-input" id="customSwitch3" [(ngModel)]="isEmail"/>
+        <label class="custom-control-label" for="customSwitch3"></label>
+      </div>
+
 <br>
 <div *ngIf="isEmail">
     <table>
         Attachements files available
       <div *ngFor="let obj of modelsArray">
         <div class="side-by-side" *ngIf="!obj.modelConcernsEmail">
-            <tr><td>attach {{ obj.modelId }} </td> <td><input type="checkbox"  (click)="saveModelToAttach(obj.modelId)" /></td> 
+            <div *ngFor="let chosenEntity of clickedObjects">
+                <div *ngIf="chosenEntity == getFirstWord(obj.modelId)">
+                    <tr><td>attach {{ obj.modelId }} </td> <td><input type="checkbox" (click)="saveModelToAttach(obj.modelId)"/></td>
+                </div>
+            </div>
         </div>
       </div>
     </table>
 </div>
-<input type="text" [(ngModel)]="inputModelId" placeholder="Model id" required>
+<input class="form-control" type="text" [(ngModel)]="inputModelId" placeholder="Model id" required>
 <br>
-<textarea type="text" id="mainText" [(ngModel)]="inputModelText" placeholder="Model Text" style="white-space: pre-wrap;" required></textarea>
+<textarea class="form-control" type="text" id="mainText" [(ngModel)]="inputModelText" placeholder="Model Text" style="white-space: pre-wrap;" required></textarea>
 <br>
-<button (click)="saveModel()">Save</button>
-<button (click)="cancelAdding()">Cancel</button>
+<button class="btn btn-success" (click)="saveModel()">Save</button>
+<button class="btn btn-danger" (click)="cancelAdding()">Cancel</button>
 
 
 

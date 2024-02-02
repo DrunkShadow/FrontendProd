@@ -13,9 +13,10 @@
               </div>
           </table>
         </div>
-        <button (click)="sendEmail(modelToSend,modelToAttach)">Send Mail</button>
       </div>
-      <button id="exit" (click)="quit()">close</button>
+      <button class="btn btn-success" (click)="sendEmail(modelToSend,modelToAttach)">Send Mail</button>
+
+      <button id="exit" class="btn btn-danger" (click)="quit()">close</button>
     </div>
   </div>
 
@@ -24,20 +25,22 @@
     <div id="allButtons">
       <div *ngIf="+chosenEntityId / 10000 < 1">
         <div *ngFor="let obj of modelsArray">
-          <div *ngIf="obj.modelConcernsProject">
-            <button (click)="downloadPdf(obj.modelId)">Download {{ obj.modelId }}</button>
+          <div *ngIf="obj.modelConcernsProject && !obj.modelConcernsEmail">
+            <button class="btn btn-primary" (click)="downloadPdf(obj.modelId)">Download {{ obj.modelId }}</button>
           </div>
         </div>
       </div>
 
       <div *ngIf="+chosenEntityId / 10000 >= 1">
         <div *ngFor="let obj of modelsArray">
-          <div *ngIf="obj.modelConcernsWorker">
-            <button (click)="downloadPdf(obj.modelId)">Download {{ obj.modelId }}</button>
+          <div *ngIf="obj.modelConcernsWorker && !obj.modelConcernsEmail">
+            <button class="btn btn-primary" (click)="downloadPdf(obj.modelId)">Download {{ obj.modelId }}</button>
           </div>
         </div>
       </div>
-      <button id="exit" (click)="quit()">close</button>
+      
+      <button id="exit" class="btn btn-danger" (click)="quit()">close</button>
+
     </div>
   </ng-template>
 </div>

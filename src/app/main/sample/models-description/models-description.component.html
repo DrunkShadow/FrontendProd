@@ -11,13 +11,13 @@
         <textarea [(ngModel)]="chosenModel.modelText"></textarea>
         <br>
 
-        <button (click)="saveChanges()">save</button>
-        <button (click)="cancelEditing()">cancel</button>
+        <button class="btn btn-success" (click)="saveChanges()">save</button>
+        <button class="btn btn-danger" (click)="cancelEditing()">cancel</button>
     </div>
     <br>
     <br>
 
-    <button (click)="sendSignal()">close</button>
+    <button class="btn btn-danger" (click)="sendSignal()">close</button>
 
 </div>
 

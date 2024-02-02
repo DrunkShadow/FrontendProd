@@ -1,0 +1,93 @@
+<button type="button" class="btn btn-outline-primary" (click)="modalOpenVC(ajouterMaterielle)" rippleEffect>
+    Add Materielle
+  </button>
+  
+  <button class="btn btn-outline-primary" (click)="downloadBarCode('0')">
+    download All barcodes
+  </button>
+  <br><br>
+
+  <div style="display: flex; align-items: center;">
+    <label style="margin-right: 10px;">height:</label>
+    <div *ngIf="!isEditingHeight" (dblclick)="startEditing('height')">
+        {{ height }}
+    </div>
+    <input *ngIf="isEditingHeight" type="text" [(ngModel)]="height" (blur)="stopEditing('height')">
+
+    <label style="margin-left: 20px; margin-right: 10px;">width:</label>
+    <div *ngIf="!isEditingWidth" (dblclick)="startEditing('width')">
+        {{ width }}
+    </div>
+    <input *ngIf="isEditingWidth" type="text" [(ngModel)]="width" (blur)="stopEditing('width')">
+
+    <label style="margin-left: 20px; margin-right: 10px;">perRow:</label>
+    <div *ngIf="!isEditingPerRow" (dblclick)="startEditing('perRow')">
+        {{ perRow }}
+    </div>
+    <input *ngIf="isEditingPerRow" type="text" [(ngModel)]="perRow" (blur)="stopEditing('perRow')">
+</div>
+please note that each barcode block is about 200x250px recommended values for {{ perRow }} bars in each row are: height {{calculateHeight()}} and width: {{calculateWidth()}}
+
+<br>
+<br>
+
+
+  <ng-template #ajouterMaterielle let-modal>
+    <div class="modal-header" >
+      <h5 class="modal-title" id="exampleModalCenterTitle">Add a material</h5>
+      <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+        <label>Reference</label>
+        <input class="form-control" type="number" [(ngModel)]="ref" placeholder="reference" required>
+        <label>Titre</label>
+        <input class="form-control" type="text" [(ngModel)]="title" placeholder="titre" required>
+        <label>Description</label>
+        <input class="form-control" type="text" [(ngModel)]="desc" placeholder="description" required>
+        <label>Prix</label>
+        <input class="form-control" type="text" [(ngModel)]="prix" placeholder="prix" required>
+        <label>Categorie</label>
+        <input class="form-control" type="text" [(ngModel)]="cat" placeholder="categorie" required>
+        <label>Date</label>
+        <input class="form-control" type="date" [(ngModel)]="date" placeholder="date" required>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="modal.close('Accept click');addMaterielle()" rippleEffect>
+        Accept
+      </button>
+    </div>
+  </ng-template>
+
+
+
+
+<div>
+<button (click)="togglePopup()" class="btn btn-primary btn-block">Show Materielle</button>
+<table class="table" *ngIf="showTable">
+  <thead>
+    <tr>
+      <th>Reference</th>
+      <th>Title</th>
+      <th>Category</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let materielle of materielleArray">
+      <td>{{ materielle.reference}}</td>
+      <td>{{ materielle.titre }}</td>
+      <td>{{ materielle.categorie }}</td>
+      <td>{{ materielle.description }}</td>
+      <td>{{ materielle.prix }}</td>
+      <td>{{ materielle.date }}</td>
+      <td> <button class="btn btn-primary" (click)="deleteMaterielle(materielle.reference)">Delete</button>  <button class="btn btn-primary" (click)="downloadBarCode(materielle.reference)">Download barcode</button> </td>
+    </tr>
+  </tbody>
+</table>
+
+</div>

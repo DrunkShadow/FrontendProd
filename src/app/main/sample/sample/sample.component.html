@@ -1,14 +1,14 @@
-<button (click)="togglePopup('table1')" class="long-button">Show Projects</button>
+<button (click)="togglePopup('table1')" class="btn btn-primary btn-block">Show Projects</button>
 
-<table *ngIf="showTable1">
+<table class="table" *ngIf="showTable1">
     <thead>
       <tr>
-        <td>Id</td>
-        <td>Name</td>
-        <td>Budget</td>
-        <td>Category</td>
-        <td>Date</td>
-        <td>Actions</td>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Budget</th>
+        <th>Category</th>
+        <th>Date</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -18,24 +18,20 @@
         <td>{{ element.projectBudget }}</td>
         <td>{{ element.projectCategory }}</td>
         <td>{{ element.projectDate.substring(0,10) }}</td>
-        <td><button (click)="toggleRepbox(element.projectId,false)">File a report</button></td>
+        <td><button class="btn btn-primary" (click)="toggleRepbox(element.projectId,false)">File a report</button></td>
       </tr>
     </tbody>
   </table>
 
-<br>
-<br>
-<br>
-
-<button (click)="togglePopup('table2')" class="long-button">Show Workers</button>
+<button (click)="togglePopup('table2')" class="btn btn-primary btn-block">Show Workers</button>
   <table *ngIf="showTable2">
     <thead>
       <tr>
-        <td>Id</td>
-        <td>Name</td>
-        <td>Lastname</td>
-        <td>Title</td>
-        <td>Actions</td>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Lastname</th>
+        <th>Title</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -44,12 +40,13 @@
         <td>{{ element.workerName }}</td>
         <td>{{ element.workerLastName }}</td>
         <td>{{ element.workerTitle }}</td>
-        <td><button (click)="toggleRepbox(element.workerId,false)">File a report</button> <button (click)="toggleRepbox(element.workerId,true)">Send an Email</button></td>
-
+        <td><button class="btn btn-primary" (click)="toggleRepbox(element.workerId,false)">File a report</button> <button class="btn btn-primary" (click)="toggleRepbox(element.workerId,true)">Send an Email</button></td>
       </tr>
     </tbody>
   </table>
   <div *ngIf="showRepbox">
     <app-repbox class="show" [isMail]="isMail" [chosenEntityId]="elementId" (CloseButton)="handleCloseButtonEvent($event)"></app-repbox>
   </div>
+
+
 
